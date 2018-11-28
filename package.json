@@ -67,7 +67,7 @@
   "devDependencies": { },
   "scripts": {
     "start": "node src/server/index.js",
-    "build": "rimraf public && cross-env webpack",
+    "build": "cross-env webpack",
     "dev": "rimraf public && cross-env webpack && node src/server/index.js",
     "prod": "rimraf public && cross-env webpack && node src/server/index.js",
     "flow": "node_modules/.bin/flow"
