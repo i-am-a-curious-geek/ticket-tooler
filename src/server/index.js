@@ -14,7 +14,7 @@ const DOCS_PATH = '../../public/';
 /*const PORT      = 3000;
 const IP_ADRESS = 'localhost';*/
 const PORT = process.env.PORT;
-const IP_ADRESS = process.env.HOST;
+const IP_ADRESS = process.env.HOSTNAME;
 const app       = express();   
 
 /*const TARGET = process.env.npm_lifecycle_event;  
