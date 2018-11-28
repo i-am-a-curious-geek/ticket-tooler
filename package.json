@@ -8,7 +8,7 @@
     "node": "v10.4.1",
     "npm": "6.1.0"
   },
-  "main": "src/index.js",
+  "main": "src/server/index.js",
   "dependencies": {
     "@webpack-loader/raw": "^1.0.0-alpha.0",
     "babel-cli": "^6.24.1",

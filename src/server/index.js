@@ -16,7 +16,7 @@ const IP_ADRESS = 'localhost';
 
 const app       = express();   
 
-const TARGET = process.env.npm_lifecycle_event;  
+/*const TARGET = process.env.npm_lifecycle_event;  
 
 if(TARGET === "dev") {
   app.use(devMiddleware(compiler, {
@@ -24,15 +24,15 @@ if(TARGET === "dev") {
     historyApiFallback: true
   }));
   app.use(hotMiddleware(compiler));
-} else if(TARGET === "prod") {
+} else if(TARGET === "prod") {*/
   app.use(express.static(path.join(__dirname, DOCS_PATH)));
-}
+/*}*/
 app.get(
   '/*',
   (req, res) => res.sendFile(path.join(__dirname, DOCS_PATH, 'index.html'))
 );
 
-if(TARGET === "dev") {
+/*if(TARGET === "dev") {
   return app.listen(
     PORT, 
     (err) => {
@@ -45,7 +45,7 @@ if(TARGET === "dev") {
         =====================================================
     `);
   });
-} else if(TARGET === "prod") {
+} else if(TARGET === "prod") {*/
   return app.listen(
     PORT,
     IP_ADRESS,
@@ -55,4 +55,4 @@ if(TARGET === "dev") {
       =====================================================
     `)
   );
-}
+/*}*/
