@@ -84,7 +84,7 @@ const config = {
         loader: '@webpack-loader/raw'       
       },                           
       {
-        test: /\.(gif|png|jpe?g|ico|svg)$/i, 
+        test: /\.(gif|png|jpe?g|svg)$/i, 
         exclude:  [nodeModulesDir],
         use: [
           'file-loader?name=[path][name].[ext]',
@@ -135,7 +135,7 @@ const config = {
       title: "Ticket Tooler",
       template: path.join(__dirname, 'assets/template.html'),
       filename: path.join(__dirname, 'public/index.html'),
-      favicon: path.join(__dirname, 'assets/img/favicon.ico'),
+      favicon: path.join(__dirname, 'assets/img/favicon_32x32.png'),
       minify: {
         collapseWhitespace: true,
         collapseInlineTagWhitespace: true,
@@ -165,7 +165,7 @@ const config = {
         title: "Ticket Tooler",
         template: path.join(__dirname, 'assets/template.html'),
         filename: path.join(__dirname, 'public/index.html'),
-        favicon: path.join(__dirname, 'assets/img/favicon.ico'),
+        favicon: path.join(__dirname, 'assets/img/favicon_32x32.png'),
         minify: {
           collapseWhitespace: true,
           collapseInlineTagWhitespace: true,
