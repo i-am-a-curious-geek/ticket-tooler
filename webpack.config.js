@@ -1,4 +1,5 @@
-var debug = (process.env.npm_lifecycle_event !== "prod") ? true : false
+/*var debug = (process.env.npm_lifecycle_event !== "prod") ? true : false*/
+var debug = false; // for production deployment mode on heroku
 
 console.log("Debug Mode: " + debug);
 
