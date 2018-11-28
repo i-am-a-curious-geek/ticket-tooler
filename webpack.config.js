@@ -84,7 +84,7 @@ const config = {
         loader: '@webpack-loader/raw'       
       },                           
       {
-        test: /\.(gif|png|jpe?g|svg)$/i, 
+        test: /\.(gif|png|jpe?g|ico|svg)$/i, 
         exclude:  [nodeModulesDir],
         use: [
           'file-loader?name=[path][name].[ext]',
@@ -94,7 +94,7 @@ const config = {
               bypassOnDebug: true, // webpack@1.x
               disable: true, // webpack@2.x and newer                           
               optipng: {                
-                enabled: false,
+                enabled: false
               }
             }
           }
