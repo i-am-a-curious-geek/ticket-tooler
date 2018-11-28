@@ -1,5 +1,7 @@
 import moment               from 'moment';
 
+import json from "api/tickets.json";
+
 const REQUEST_TICKET_DATA   = 'REQUEST_TICKET_DATA';
 const RECEIVED_TICKET_DATA  = 'RECEIVED_TICKET_DATA';
 const ERROR_TICKET_DATA     = 'ERROR_TICKET_DATA';
@@ -123,7 +125,7 @@ function errorTicketData(time = moment().format()) {
 function fetchTicketData() { 
   return dispatch => {
     dispatch(requestTicketData())
-    return fetch(`http://${process.env.HOSTNAME}:${process.env.PORT}/api/tickets.json`, {      
+    return fetch(`https://ticket-tooler.herokuapp.com${json}`, {      
       "headers": {
         "Accept": "application/json",
         "Content-Type": "application/json",

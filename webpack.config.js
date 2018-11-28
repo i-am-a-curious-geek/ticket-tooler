@@ -69,6 +69,16 @@ const config = {
     rules: [
       debug ? babelLoaderEntryDev : babelLoaderEntryProd,      
       debug ? cssLoaderDev : cssLoaderProd,
+     {
+        test: /\.json$/,
+        exclude:  [nodeModulesDir],
+        use: [
+          'file-loader?name=[path][name].[ext]',
+          {
+            loader: 'json-loader'
+          }
+        ]
+      }, 
       {
         test: /\.(txt)$/,
         exclude:  [nodeModulesDir],
