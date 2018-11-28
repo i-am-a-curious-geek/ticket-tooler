@@ -91,12 +91,12 @@ function fetchTicketData() { // CALLING AN API
       .then(response => {
         if (response.status >= 200 && response.status < 300) {
           return response;
-        } else {
+        }/* else {
           const error = new Error(response.statusText);
           error.response = response;
           
           return Promise.reject(error);
-        }
+        }*/
       })    
       .then(response => {        
         return response.body
