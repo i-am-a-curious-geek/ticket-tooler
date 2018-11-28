@@ -55,9 +55,7 @@
     "webpack": "^3.9.1",
     "webpack-dev-middleware": "^1.12.2",
     "webpack-dev-server": "^2.9.5",
-    "webpack-hot-middleware": "^2.21.0"
-  },
-  "devDependencies": {
+    "webpack-hot-middleware": "^2.21.0",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.7.2",
     "eslint-plugin-react": "^7.3.0",
@@ -66,7 +64,10 @@
     "eslint-plugin-flowtype": "^2.35.1",
     "flow-bin": "^0.61.0"
   },
+  "devDependencies": { },
   "scripts": {
+    "start": "node src/server/index.js",
+    "build": "rimraf public && cross-env webpack",
     "dev": "rimraf public && cross-env webpack && node src/server/index.js",
     "prod": "rimraf public && cross-env webpack && node src/server/index.js",
     "flow": "node_modules/.bin/flow"
