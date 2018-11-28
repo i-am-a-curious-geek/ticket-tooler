@@ -135,7 +135,7 @@ const config = {
       title: "Ticket Tooler",
       template: path.join(__dirname, 'assets/template.html'),
       filename: path.join(__dirname, 'public/index.html'),
-      favicon: path.join(__dirname, 'assets/img/favicon_32x32.png'),
+      favicon: path.join(__dirname, 'assets/img/favicon.ico'),
       minify: {
         collapseWhitespace: true,
         collapseInlineTagWhitespace: true,
@@ -165,7 +165,7 @@ const config = {
         title: "Ticket Tooler",
         template: path.join(__dirname, 'assets/template.html'),
         filename: path.join(__dirname, 'public/index.html'),
-        favicon: path.join(__dirname, 'assets/img/favicon_32x32.png'),
+        favicon: path.join(__dirname, 'assets/img/favicon.ico'),
         minify: {
           collapseWhitespace: true,
           collapseInlineTagWhitespace: true,
