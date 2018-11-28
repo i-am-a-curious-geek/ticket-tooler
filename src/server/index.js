@@ -11,9 +11,10 @@ const compiler      = webpack(config);
 const chalk         = require('chalk');
 
 const DOCS_PATH = '../../public/';
-const PORT      = 3000;
-const IP_ADRESS = 'localhost';
-
+/*const PORT      = 3000;
+const IP_ADRESS = 'localhost';*/
+const PORT = process.env.PORT;
+const IP_ADRESS = process.env.HOST;
 const app       = express();   
 
 /*const TARGET = process.env.npm_lifecycle_event;  
