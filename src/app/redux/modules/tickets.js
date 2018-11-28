@@ -123,14 +123,14 @@ function errorTicketData(time = moment().format()) {
 function fetchTicketData() { 
   return dispatch => {
     dispatch(requestTicketData())
-    return fetch("http://localhost:3000/api/data/tickets.json", {
+    /*return fetch("http://localhost:3000/api/data/tickets.json", {
       "credentials": "same-origin",
       "headers": {
         "Accept": "application/json",
         "Content-Type": "application/json",
         "method": "POST"
       }
-    })
+    })*/
     .then(response => // .then(response => response.json())
       /*
       if (response.status >= 200 && response.status < 300) {

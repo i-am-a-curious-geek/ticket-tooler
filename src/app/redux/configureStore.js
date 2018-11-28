@@ -1,4 +1,4 @@
-const TARGET = process.env.npm_lifecycle_event;
+/*const TARGET = process.env.npm_lifecycle_event;*/
 
 import {
   createStore,
