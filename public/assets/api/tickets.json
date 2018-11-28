@@ -1,0 +1,1 @@
+export default "[  \r\n\t{\"id\":\"1\",\"title\": \"TRINITY BLOOD\",\"status\":\"IN PROGRESS\"},\r\n\t{\"id\":\"2\",\"title\": \"THE DARK AGES\",\"status\":\"IN PROGRESS\"},\r\n\t{\"id\":\"3\",\"title\": \"ARMAGEGGON\",\"status\":\"CLOSED\"},\r\n\t{\"id\":\"4\",\"title\": \"NOAH'S ARK\",\"status\":\"IN PROGRESS\"}\r\n]"

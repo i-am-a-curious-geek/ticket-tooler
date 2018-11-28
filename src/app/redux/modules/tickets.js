@@ -1,6 +1,7 @@
 import moment               from 'moment';
 
 import json from "api/tickets.json";
+import "text-encoding";
 
 const REQUEST_TICKET_DATA   = 'REQUEST_TICKET_DATA';
 const RECEIVED_TICKET_DATA  = 'RECEIVED_TICKET_DATA';
@@ -13,12 +14,7 @@ const RESTART_NEW_TICKET = "RESTART_NEW_TICKET";
 
 var initialState = {
   isFetching: false,
-  data:       [  
-                {"id":"1","title": "TRINITY BLOOD","status":"IN PROGRESS"},
-                {"id":"2","title": "THE DARK AGES","status":"IN PROGRESS"},
-                {"id":"3","title": "ARMAGEGGON","status":"CLOSED"},
-                {"id":"4","title": "NOAH'S ARK","status":"IN PROGRESS"}
-              ],
+  data:       [],
   time:       null
 };
 
@@ -73,6 +69,98 @@ function receivedTicketData(data, time = moment().format()) {
   };
 }
 
+function errorTicketData(time = moment().format()) {
+  return {
+    type:       ERROR_TICKET_DATA,
+    isFetching: false,
+    time
+  };
+}
+
+function fetchTicketData() { // CALLING AN API 
+  return dispatch => {
+    dispatch(requestTicketData()) 
+      fetch(`${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}${json}`, {   
+        credentials: 'same-origin',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'GET'
+      })      
+      .then(response => {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          const error = new Error(response.statusText);
+          error.response = response;
+          
+          return Promise.reject(error);
+        }
+      })    
+      .then(response => {        
+        return response.body
+      })
+      .then(body => body.getReader())
+      .then(reader => reader.read())
+      .then(function({ done, value }) {         
+        return value
+      })
+      .then(uint8array => {
+        var text = new TextDecoder("utf-8").decode(uint8array);        
+        text = (text).replace('export default "', '');
+        text = (text).replace(']"', ']');
+        text = (text).replace(/\\r|\\n|\\t|\\/g, '');
+        
+        return JSON.parse(text)
+      }).then(data => {
+        return new Promise(
+          resolve => {  
+            setTimeout(() => {
+              resolve([...data])
+            }, 2000)                                  
+          }
+        )
+      })
+      .then(data => dispatch(receivedTicketData(data)))  
+      .catch(error => dispatch(errorTicketData(error)))                             
+  }
+}
+
+function shouldFetchTicketData(state) {
+  const ticketsStore = state.tickets; 
+  if(toCache) {
+    if(initialData == ticketsStore.data) {
+      console.log("fetching for initialisation");
+      if(ticketsStore.isFetching) {        
+        return false;
+      } else {        
+        return true;
+      }
+    } else {    
+      // no need to anything
+      console.log(ticketsStore.data);
+      console.log("Cache stores the prevState and nextState");
+    }
+  } else {
+    console.log("fetching for initialisation");
+    if(ticketsStore.isFetching) {        
+      return false;
+    } else {        
+      return true;
+    }
+  }
+}
+
+export function fetchTicketDataIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldFetchTicketData(getState())) {
+      return dispatch(fetchTicketData());
+    }
+  };
+}
+
+// ============================ SYNCHRONOUS CALLS =================================== //
 export function submitTicket(data, time = moment().format()) {  
   initialState.data = data;
   return {
@@ -111,80 +199,4 @@ export function restartTicket(data, time = moment().format()) {
     data,
     time      
   }      
-}
-
-
-function errorTicketData(time = moment().format()) {
-  return {
-    type:       ERROR_TICKET_DATA,
-    isFetching: false,
-    time
-  };
-}
-
-function fetchTicketData() { 
-  return dispatch => {
-    dispatch(requestTicketData())
-    return fetch(`https://ticket-tooler.herokuapp.com${json}`, {      
-      "headers": {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "method": "GET"
-      }
-    })
-    .then(response => // .then(response => response.json())
-      /*
-      if (response.status >= 200 && response.status < 300) {
-        return response;
-      } else {
-        const error = new Error(response.statusText);
-        error.response = response;
-        
-        return Promise.reject(error);
-      }
-      */
-      new Promise(
-        resolve => {
-          setTimeout(function() {
-            resolve([...initialState.data])
-          }, 3000)        
-        }
-      )
-    )        
-    .then(data => dispatch(receivedTicketData(data)))
-  }
-}
-
-
-function shouldFetchTicketData(state) {
-  const ticketsStore = state.tickets; 
-  if(toCache) {
-    if(initialData == ticketsStore.data) {
-      console.log("fetching for initialisation");
-      if(ticketsStore.isFetching) {        
-        return false;
-      } else {        
-        return true;
-      }
-    } else {    
-      // no need to anything
-      console.log(ticketsStore.data);
-      console.log("Cache stores the prevState and nextState");
-    }
-  } else {
-    console.log("fetching for initialisation");
-    if(ticketsStore.isFetching) {        
-      return false;
-    } else {        
-      return true;
-    }
-  }
-}
-
-export function fetchTicketDataIfNeeded() {
-  return (dispatch, getState) => {
-    if (shouldFetchTicketData(getState())) {
-      return dispatch(fetchTicketData());
-    }
-  };
 }

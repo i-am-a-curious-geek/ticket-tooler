@@ -68,24 +68,23 @@ const config = {
   module: {
     rules: [
       debug ? babelLoaderEntryDev : babelLoaderEntryProd,      
-      debug ? cssLoaderDev : cssLoaderProd,
-     {
-        test: /\.json$/,
+      debug ? cssLoaderDev : cssLoaderProd, 
+      {
+        test: /\.(json)$/,
         exclude:  [nodeModulesDir],
         use: [
-          'file-loader?name=[path][name].[ext]',
-          {
-            loader: 'json-loader'
-          }
-        ]
-      }, 
+          'file-loader?name=[path][name].[ext]',   
+           {       
+            loader: '@webpack-loader/raw'          
+           }
+        ]        
+      },         
       {
-        test: /\.(txt)$/,
-        exclude:  [nodeModulesDir],
-        use: '@webpack-loader/raw'
+        test: /\.(txt)$/,       
+        loader: '@webpack-loader/raw'       
       },                           
       {
-        test: /\.(gif|png|jpe?g|svg|json)$/i, 
+        test: /\.(gif|png|jpe?g|svg)$/i, 
         exclude:  [nodeModulesDir],
         use: [
           'file-loader?name=[path][name].[ext]',
