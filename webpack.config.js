@@ -70,12 +70,12 @@ const config = {
       debug ? babelLoaderEntryDev : babelLoaderEntryProd,      
       debug ? cssLoaderDev : cssLoaderProd,
       {
-        test: /\.txt$/,
+        test: /\.(txt)$/,
         exclude:  [nodeModulesDir],
         use: '@webpack-loader/raw'
       },                           
       {
-        test: /\.(gif|png|jpe?g|svg)$/i, 
+        test: /\.(gif|png|jpe?g|svg|json)$/i, 
         exclude:  [nodeModulesDir],
         use: [
           'file-loader?name=[path][name].[ext]',
@@ -108,6 +108,7 @@ const config = {
       styles: path.join(path.resolve(__dirname, "assets"), "styles"),     
       scripts: path.join(path.resolve(__dirname, "assets"), "scripts"),      
       img: path.join(path.resolve(__dirname, "assets"), "img"),      
+      api: path.join(path.resolve(__dirname, "assets"), "api"),      
       components: path.join(path.resolve(__dirname, "src"), "app/components"),
       containers: path.join(path.resolve(__dirname, "src"), "app/containers"),            
       views: path.join(path.resolve(__dirname, "src"), "app/views")
